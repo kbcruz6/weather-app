@@ -5,7 +5,6 @@ import { BsSearch } from "react-icons/bs";
 
 const Navbar = ({ text }) => {
   const location = useLocation();
-  console.log(location);
   return (
     <div className="w-full">
       <div className="bg-[var(--color2)] flex justify-between items-center shadow-lg shadow-red-800 text-[var(--color4)] px-4 ">

@@ -4,7 +4,7 @@ import Header from "../common/Header";
 import { WeatherContext } from "../../context/WeatherContext";
 
 const Forecast = () => {
-  const { userData, weather, unit } = useContext(WeatherContext);
+  const { weather, unit } = useContext(WeatherContext);
   console.log(weather);
 
   return (

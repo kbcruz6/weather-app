@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
@@ -11,20 +11,22 @@ import Spinner from "../common/Spinner";
 
 const Search = () => {
   //! VARIABLES
-  const { userData, setUserData, weather, setWeather, unit, setUnit } =
-    useContext(WeatherContext);
+  const { weather, setWeather, unit } = useContext(WeatherContext);
 
   const [queryType, setQueryType] = useState("");
-  const [city, setCity] = useState("");
   const [lat, setLat] = useState("");
   const [lon, setLon] = useState("");
-  const [url, setUrl] = useState("");
-  const PUBLIC_WEATHER_KEY = "708abcef5861171a96f64c0a61fd7cc2";
   const [loading, setLoading] = useState(false);
+  const [city, setCity] = useState("");
+  const PUBLIC_WEATHER_KEY = "708abcef5861171a96f64c0a61fd7cc2";
 
   const navigate = useNavigate();
 
-  const urlCity = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`;
+
+  const [urlCity, setUrlCity] = useState(
+    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`
+  );
   const urlLat = `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${PUBLIC_WEATHER_KEY}`;
 
   //! FUNCTIONS
@@ -32,11 +34,10 @@ const Search = () => {
     try {
       e.preventDefault();
       setLoading(true);
-      await axios.get(urlCity).then((response) => {
-        setWeather(response.data);
-        setLoading(false);
-        navigate("/forecast");
-      });
+      const response = await axios.get(url);
+      setWeather(response.data);
+      setLoading(false);
+      navigate("/forecast");
     } catch (error) {
       console.log(error.response);
       return Swal.fire({
@@ -47,23 +48,50 @@ const Search = () => {
       });
     }
   };
-  const fetchWeatherLat = async (e) => {
+
+  const getCity = async (e) => {
     try {
       e.preventDefault();
-      await axios.get(urlLat).then((response) => {
-        setWeather(response.data);
-        navigate("/forecast");
-      });
+      const response = await axios.get(urlLat);
+      setCity(response.data[0].name);
+      console.log("RESPONSE: ", response);
+      console.log("NAME: ", response.data[0].name);
+      navigate("/forecast");
     } catch (error) {
-      console.log(error.response);
-      return Swal.fire({
-        title: "Error! City not found",
-        text: "Please enter a valid city",
-        icon: "error",
-        confirmButtonText: ` <a href="/">OK</a>`,
-      });
+      console.log(error);
     }
   };
+
+  useEffect(() => {
+    const fetchWeatherLat = async (e) => {
+      try {
+        e.preventDefault();
+        setUrlCity(
+          `https://api.openweathermap.org/data/2.5/weather?q=${response.data[0].name
+            .split(" ")
+            .join("")}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`
+        );
+        console.log("URLCITY", urlCity);
+        const response = await axios.get(urlCity);
+        setWeather(response.data);
+        navigate("/forecast");
+      } catch (error) {
+        console.log(error.response);
+      }
+    };
+    return () => {
+      fetchWeatherLat();
+    };
+  }, [getCity]);
+
+  // return Swal.fire({
+  //   title: "Error! City not found",
+  //   text: "Please enter a valid city",
+  //   icon: "error",
+  //   confirmButtonText: ` <a href="/">OK</a>`,
+  // });
+  // 51.5098
+  // -0.1180
 
   if (loading) {
     return <Spinner />;
@@ -145,7 +173,7 @@ const Search = () => {
             {/*//! BY LAT & LONG  */}
             <div className={queryType === "lat" ? "" : "hidden"}>
               <form
-                onSubmit={fetchWeatherLat}
+                onSubmit={getCity}
                 className="flex flex-col justify-center items-center text-center bg-[var(--color2)] text-[var(--color4)] w-[300px] h-[200px] rounded-3xl shadow-lg shadow-red-800 gap-4 p-2"
               >
                 <div>
