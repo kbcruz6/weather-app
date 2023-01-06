@@ -62,6 +62,12 @@ const Search = () => {
       console.log("NAME: ", response.data[0].name);
     } catch (error) {
       console.log(error);
+      return Swal.fire({
+        title: "Error! City not found",
+        text: "Please enter valid cordinates",
+        icon: "error",
+        confirmButtonText: ` <a href="/">OK</a>`,
+      });
     }
   };
 
@@ -92,7 +98,7 @@ const Search = () => {
           // setLoading(false);
           navigate("/forecast");
         } catch (error) {
-          console.log("RESPONSE ERROR", error.response);
+          console.log("ERROR RESPONSE", error.response);
           return Swal.fire({
             title: "Error! City not found",
             text: "Please enter valid cordinates",
@@ -101,7 +107,6 @@ const Search = () => {
           });
         }
       };
-
       fetchWeatherLat();
     }
   }, [auxTwo]);
