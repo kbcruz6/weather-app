@@ -18,7 +18,7 @@ const Footer = () => {
             <FaLinkedin size={20} />
           </a>
           <a
-            href="https://github.com/kbcruz6"
+            href="https://github.com/kbcruz6/weather-app-challenge-apeiron"
             target="_blank"
             className="hover:text-red-600 duration-300"
           >
