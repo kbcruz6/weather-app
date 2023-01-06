@@ -8,7 +8,7 @@ const Forecast = () => {
   // console.log(weather);
 
   return (
-    <div className="flex flex-col h-screen w-full justify-between items-center">
+    <div className="flex flex-col h-screen w-full justify-between items-center dark:bg-gray-900 duration-300">
       <Header text={`${weather.name.toUpperCase()}, ${weather.sys.country}`} />
       {/*//! CURRENT WEATHER  */}
       <div className="items-center justify-center flex flex-col h-full">
@@ -34,7 +34,7 @@ const Forecast = () => {
         </div>
 
         {/*//! BOX  */}
-        <div className="flex flex-row justify-between p-6 bg-[var(--color2)] text-[var(--color4)] rounded-3xl shadow-lg shadow-red-800 px-5 py-4 gap-4 mb-4">
+        <div className="flex flex-row justify-between p-6 bg-[var(--color2)] text-[var(--color4)] rounded-3xl shadow-red-800 px-5 py-4 gap-4 mb-4 dark:bg-gray-800 dark:text-slate-300 dark:shadow-slate-700  duration-300 shadow-md">
           {/*//! HUMIDITY  */}
           <div className="  text-center">
             <h3 className="font-bold">Humidity</h3>

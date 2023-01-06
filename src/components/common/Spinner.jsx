@@ -6,7 +6,7 @@ const Spinner = () => {
     <div
       data-aos="fade-in"
       data-aos-duration="1000"
-      className="w-full h-screen items-center flex"
+      className="w-full h-screen items-center flex dark:bg-gray-900"
     >
       <img
         className="w-[200px] block z-20 m-auto"

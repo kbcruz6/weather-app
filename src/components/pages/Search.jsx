@@ -112,7 +112,7 @@ const Search = () => {
     return <Spinner />;
   } else {
     return (
-      <div className="flex flex-col h-screen w-full justify-between items-center">
+      <div className="flex flex-col h-screen w-full justify-between items-center dark:bg-gray-900 duration-300">
         {/*//! HEADER  */}
         <Header text={"Search zone!"} />
 
@@ -124,7 +124,13 @@ const Search = () => {
             data-aos-delay="200"
             className="font-bold text-2xl text-center"
           >
-            Choose smartly the kind of query...
+            {queryType === ""
+              ? "Type of query..."
+              : [
+                  queryType === "city"
+                    ? "Query by City Name"
+                    : "Query by Coordinates",
+                ]}
           </h1>
           {/*//! OPTIONS */}
           <div className="flex sm:flex-row flex-col gap-6">
@@ -142,9 +148,9 @@ const Search = () => {
               >
                 <button
                   onClick={() => setQueryType("city")}
-                  className="bg-[var(--color2)] text-[var(--color4)] rounded-3xl shadow-lg shadow-red-800 px-6 py-2 hover:bg-[var(--color4)] hover:text-[var(--color2)] duration-300"
+                  className="bg-[var(--color2)] text-[var(--color4)] rounded-3xl shadow-red-800 px-6 py-2 hover:bg-[var(--color4)] hover:text-[var(--color2)] dark:bg-slate-300 dark:text-slate-700 dark:shadow-slate-600 dark:hover:bg-slate-900 dark:hover:text-slate-300 duration-300 shadow-md"
                 >
-                  By City
+                  By City Name
                 </button>
               </div>
 
@@ -155,7 +161,7 @@ const Search = () => {
               >
                 <button
                   onClick={() => setQueryType("lat")}
-                  className="bg-[var(--color2)] text-[var(--color4)] rounded-3xl shadow-lg shadow-red-800 px-6 py-2 hover:bg-[var(--color4)] hover:text-[var(--color2)] duration-300"
+                  className="bg-[var(--color2)] text-[var(--color4)] rounded-3xl shadow-red-800 px-6 py-2 hover:bg-[var(--color4)] hover:text-[var(--color2)] dark:bg-slate-300 dark:text-slate-700 dark:shadow-slate-600 dark:hover:bg-slate-900 dark:hover:text-slate-300 duration-300 shadow-md"
                 >
                   By Latitude & Longitude
                 </button>
@@ -166,17 +172,18 @@ const Search = () => {
               <div className="">
                 <form
                   onSubmit={fetchWeatherCity}
-                  className="flex flex-col justify-center items-center text-center bg-[var(--color2)] text-[var(--color4)] w-[300px] h-[200px] rounded-3xl shadow-lg shadow-red-800 gap-4 p-2"
+                  className="flex flex-col justify-center items-center text-center bg-[var(--color2)] text-[var(--color4)] w-[300px] h-[200px] rounded-3xl shadow-red-800 gap-4 p-2 dark:bg-gray-800 dark:text-slate-300 dark:shadow-slate-700  duration-300 shadow-md"
                 >
+                  <p className="font-bold">Examples: Tokyo, Madrid</p>
                   <input
                     required
                     onChange={(e) => setCity(e.target.value)}
                     value={city}
                     type="text"
                     placeholder="City name"
-                    className=" rounded-3xl bg-[var(--color4)] text-[var(--color2)] px-3 py-1 outline-none shadow-lg shadow-red-800"
+                    className=" rounded-3xl bg-[var(--color4)] text-[var(--color2)] px-3 py-1 outline-none shadow-red-800 dark:bg-slate-600 dark:text-slate-300 dark:shadow-slate-600 dark:hover:bg-slate-900 duration-300 shadow-md"
                   ></input>
-                  <button className="font-bold rounded-3xl bg-[var(--color4)] text-[var(--color2)] px-3 py-1 hover:bg-red-600 duration-300 shadow-lg shadow-red-800">
+                  <button className="font-bold rounded-3xl bg-[var(--color4)] text-[var(--color2)] px-3 py-1 hover:bg-red-600 shadow-red-800 dark:bg-slate-600 dark:text-slate-300 dark:shadow-slate-600 dark:hover:bg-slate-900 dark:hover:text-slate-300 duration-300 shadow-md">
                     <div className="justify-between items-center flex flex-row gap-3">
                       Search <BsSearch size={15} />
                     </div>
@@ -189,8 +196,10 @@ const Search = () => {
             <div className={queryType === "lat" ? "" : "hidden"}>
               <form
                 onSubmit={getCity}
-                className="flex flex-col justify-center items-center text-center bg-[var(--color2)] text-[var(--color4)] w-[300px] h-[200px] rounded-3xl shadow-lg shadow-red-800 gap-4 p-2"
+                className="flex flex-col justify-center items-center text-center bg-[var(--color2)] text-[var(--color4)] w-[300px] h-[250px] rounded-3xl shadow-red-800 gap-3 p-2 dark:bg-gray-800 dark:text-slate-300 dark:shadow-slate-700  duration-300 shadow-md"
               >
+                <p className="font-bold">Madrid example:</p>
+                <p className="font-bold"> Lat: 40.4165, Lon: -3.70256</p>
                 <div>
                   <input
                     required
@@ -198,7 +207,7 @@ const Search = () => {
                     value={lat}
                     type="text"
                     placeholder="Latitude"
-                    className=" rounded-3xl bg-[var(--color4)] text-[var(--color2)] px-3 py-1 outline-none shadow-lg shadow-red-800 mb-3"
+                    className=" rounded-3xl bg-[var(--color4)] text-[var(--color2)] px-3 py-1 outline-none shadow-red-800 mb-3 dark:bg-slate-600 dark:text-slate-300 dark:shadow-slate-600 dark:hover:bg-slate-900 duration-300 shadow-md"
                   ></input>
                   <input
                     required
@@ -206,10 +215,10 @@ const Search = () => {
                     value={lon}
                     type="text"
                     placeholder="Longitude"
-                    className=" rounded-3xl bg-[var(--color4)] text-[var(--color2)] px-3 py-1 outline-none shadow-lg shadow-red-800"
+                    className=" rounded-3xl bg-[var(--color4)] text-[var(--color2)] px-3 py-1 outline-none shadow-red-800 dark:bg-slate-600 dark:text-slate-300 dark:shadow-slate-600 dark:hover:bg-slate-900 duration-300 shadow-md"
                   ></input>
                 </div>
-                <button className="font-bold rounded-3xl bg-[var(--color4)] text-[var(--color2)] px-3 py-1 hover:bg-red-600 duration-300 shadow-lg shadow-red-800">
+                <button className="font-bold rounded-3xl bg-[var(--color4)] text-[var(--color2)] px-3 py-1 hover:bg-red-600 shadow-red-800 dark:bg-slate-600 dark:text-slate-300 dark:shadow-slate-600 dark:hover:bg-slate-900 dark:hover:text-slate-300 duration-300 shadow-md">
                   <div className="justify-between items-center flex flex-row gap-3">
                     Search <BsSearch size={15} />
                   </div>

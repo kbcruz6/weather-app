@@ -6,7 +6,7 @@ import { Link } from "react-scroll";
 
 const Footer = () => {
   return (
-    <div className="bg-[var(--color2)] text-[var(--color4)] w-full text-center p-2 bottom-0 fixed">
+    <div className="bg-[var(--color2)] text-[var(--color4)] w-full text-center p-2 bottom-0 fixed dark:bg-gray-800 dark:text-slate-400 duration-300">
       <div className="flex flex-col justify-center items-center gap-0 text-sm">
         {/*//! CONTACT  */}
         <div className="flex gap-2 ">
