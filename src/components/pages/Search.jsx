@@ -29,7 +29,7 @@ const Search = () => {
   const [urlCity, setUrlCity] = useState(
     `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`
   );
-  const urlLat = `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${PUBLIC_WEATHER_KEY}`;
+  const urlLat = `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${PUBLIC_WEATHER_KEY}`;
 
   //! FUNCTIONS
   const fetchWeatherCity = async (e) => {
