@@ -54,7 +54,6 @@ const Search = () => {
   const getCity = async (e) => {
     try {
       e.preventDefault();
-      // setLoading(true);
       const response = await axios.get(urlLat);
       setCity(response.data[0].name);
       setAux(!aux);
