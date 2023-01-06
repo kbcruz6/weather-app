@@ -21,8 +21,8 @@ const Search = () => {
   const PUBLIC_WEATHER_KEY = "708abcef5861171a96f64c0a61fd7cc2";
 
   const navigate = useNavigate();
-  const [mode, setMode] = useState(false);
-  const [modeDos, setModeDos] = useState(false);
+  const [aux, setAux] = useState(false);
+  const [auxTwo, setAuxTwo] = useState(false);
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.city1}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`;
 
@@ -54,9 +54,10 @@ const Search = () => {
   const getCity = async (e) => {
     try {
       e.preventDefault();
+      // setLoading(true);
       const response = await axios.get(urlLat);
       setCity({ city2: response.data[0].name });
-      setMode(!mode);
+      setAux(!aux);
       console.log("RESPONSE: ", response);
       console.log("NAME: ", response.data[0].name);
     } catch (error) {
@@ -65,29 +66,45 @@ const Search = () => {
   };
 
   useEffect(() => {
-    const changeUrl = () => {
-      setUrlCity(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city.city2}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`
-      );
-      setModeDos(!modeDos);
-    };
-    changeUrl();
-    console.log("URLCITY", urlCity);
-  }, [mode]);
+    if (aux === false) {
+      return;
+    } else {
+      const changeUrl = () => {
+        setUrlCity(
+          `https://api.openweathermap.org/data/2.5/weather?q=${city.city2}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`
+        );
+        setAuxTwo(!auxTwo);
+      };
+      changeUrl();
+      console.log("URLCITY", urlCity);
+    }
+  }, [aux]);
 
   useEffect(() => {
-    const fetchWeatherLat = async (e) => {
-      try {
-        // e.preventDefault();
-        const response = await axios.get(urlCity);
-        setWeather(response.data);
-        navigate("/forecast");
-      } catch (error) {
-        console.log(error.response);
-      }
-    };
-    fetchWeatherLat();
-  }, [modeDos]);
+    if (auxTwo === false) {
+      return;
+    } else {
+      const fetchWeatherLat = async (e) => {
+        try {
+          e.preventDefault();
+          const response = await axios.get(urlCity);
+          setWeather(response.data);
+          // setLoading(false);
+          navigate("/forecast");
+        } catch (error) {
+          console.log("RESPONSE ERROR", error.response);
+          return Swal.fire({
+            title: "Error! City not found",
+            text: "Please enter valid cordinates",
+            icon: "error",
+            confirmButtonText: ` <a href="/">OK</a>`,
+          });
+        }
+      };
+
+      fetchWeatherLat();
+    }
+  }, [auxTwo]);
 
   // useEffect(() => {
   //   const fetchWeatherLat = async (e) => {
@@ -109,12 +126,6 @@ const Search = () => {
   //   fetchWeatherLat();
   // }, [city]);
 
-  // return Swal.fire({
-  //   title: "Error! City not found",
-  //   text: "Please enter a valid city",
-  //   icon: "error",
-  //   confirmButtonText: ` <a href="/">OK</a>`,
-  // });
   // 51.5098
   // -0.1180
 
