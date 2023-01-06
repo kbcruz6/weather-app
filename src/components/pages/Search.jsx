@@ -17,17 +17,17 @@ const Search = () => {
   const [lat, setLat] = useState("");
   const [lon, setLon] = useState("");
   const [loading, setLoading] = useState(false);
-  const [city, setCity] = useState({ city1: "", city2: "" });
+  const [city, setCity] = useState("");
   const PUBLIC_WEATHER_KEY = "708abcef5861171a96f64c0a61fd7cc2";
 
   const navigate = useNavigate();
   const [aux, setAux] = useState(false);
   const [auxTwo, setAuxTwo] = useState(false);
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.city1}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`;
 
   const [urlCity, setUrlCity] = useState(
-    `https://api.openweathermap.org/data/2.5/weather?q=${city.city2}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`
+    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`
   );
   const urlLat = `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${PUBLIC_WEATHER_KEY}`;
 
@@ -56,10 +56,11 @@ const Search = () => {
       e.preventDefault();
       // setLoading(true);
       const response = await axios.get(urlLat);
-      setCity({ city2: response.data[0].name });
+      setCity(response.data[0].name);
       setAux(!aux);
+      console.log("City NAME: ", response.data[0].name);
     } catch (error) {
-      console.log(error);
+      console.log("ERROR EN GETCITY", error);
       return Swal.fire({
         title: "Error! City not found",
         text: "Please enter valid cordinates",
@@ -73,13 +74,10 @@ const Search = () => {
     if (aux === false) {
       return;
     } else {
-      const changeUrl = () => {
-        setUrlCity(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city.city2}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`
-        );
-        setAuxTwo(!auxTwo);
-      };
-      changeUrl();
+      setUrlCity(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`
+      );
+      setAuxTwo(!auxTwo);
     }
   }, [aux]);
 
@@ -89,16 +87,16 @@ const Search = () => {
     } else {
       const fetchWeatherLat = async (e) => {
         try {
-          e.preventDefault();
-          const response = await axios.get(urlCity);
+          setLoading(true);
+          const response = await axios.get(url);
           setWeather(response.data);
-          // setLoading(false);
+          setLoading(false);
           navigate("/forecast");
         } catch (error) {
-          console.log("ERROR RESPONSE", error.response);
+          console.log("ERROR EN EL ULTIMO FETCH", error.response);
           return Swal.fire({
             title: "Error! City not found",
-            text: "Please enter valid cordinates",
+            text: "Please enter a valid city",
             icon: "error",
             confirmButtonText: ` <a href="/">OK</a>`,
           });
@@ -108,9 +106,8 @@ const Search = () => {
     }
   }, [auxTwo]);
 
-  //! Testing latitude and longitude
-  //! 51.5098
-  //! -0.1180
+  // 51.5098
+  // -0.1180
 
   if (loading) {
     return <Spinner />;
@@ -174,8 +171,8 @@ const Search = () => {
                 >
                   <input
                     required
-                    onChange={(e) => setCity({ city1: e.target.value })}
-                    value={city.city1}
+                    onChange={(e) => setCity(e.target.value)}
+                    value={city}
                     type="text"
                     placeholder="City name"
                     className=" rounded-3xl bg-[var(--color4)] text-[var(--color2)] px-3 py-1 outline-none shadow-lg shadow-red-800"
