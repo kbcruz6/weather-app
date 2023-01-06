@@ -8,6 +8,7 @@ const Footer = () => {
   return (
     <div className="bg-[var(--color2)] text-[var(--color4)] w-full text-center p-2 bottom-0 fixed">
       <div className="flex flex-col justify-center items-center gap-0 text-sm">
+        {/*//! CONTACT  */}
         <div className="flex gap-2 ">
           <a
             href="https://www.linkedin.com/in/agustin-frontend-react/"
@@ -31,6 +32,8 @@ const Footer = () => {
             <HiOutlineMail size={20} />
           </a>
         </div>
+
+        {/*//! COPY  */}
         <div>
           © 2023 | Created by{" "}
           <a

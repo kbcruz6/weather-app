@@ -58,8 +58,6 @@ const Search = () => {
       const response = await axios.get(urlLat);
       setCity({ city2: response.data[0].name });
       setAux(!aux);
-      console.log("RESPONSE: ", response);
-      console.log("NAME: ", response.data[0].name);
     } catch (error) {
       console.log(error);
       return Swal.fire({
@@ -82,7 +80,6 @@ const Search = () => {
         setAuxTwo(!auxTwo);
       };
       changeUrl();
-      console.log("URLCITY", urlCity);
     }
   }, [aux]);
 
@@ -111,28 +108,9 @@ const Search = () => {
     }
   }, [auxTwo]);
 
-  // useEffect(() => {
-  //   const fetchWeatherLat = async (e) => {
-  //     try {
-  //       e.preventDefault();
-  //       setUrlCity(
-  //         `https://api.openweathermap.org/data/2.5/weather?q=${response.data[0].name
-  //           .split(" ")
-  //           .join("")}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`
-  //       );
-  //       console.log("URLCITY", urlCity);
-  //       const response = await axios.get(urlCity);
-  //       setWeather(response.data);
-  //       navigate("/forecast");
-  //     } catch (error) {
-  //       console.log(error.response);
-  //     }
-  //   };
-  //   fetchWeatherLat();
-  // }, [city]);
-
-  // 51.5098
-  // -0.1180
+  //! Testing latitude and longitude
+  //! 51.5098
+  //! -0.1180
 
   if (loading) {
     return <Spinner />;
@@ -251,82 +229,3 @@ const Search = () => {
 };
 
 export default Search;
-
-{
-  /* 
-    const handleChange = (e) => {
-    setQueryType(e.target.value);
-  };
-  <form
-          onSubmit={fetchWeatherCity}
-          className="flex flex-col justify-center items-center text-center bg-[var(--color2)] text-[var(--color4)] w-[300px] h-[200px] rounded-3xl shadow-lg shadow-red-800 gap-4 p-2"
-        >
-          <select
-            required
-            name="querytype"
-            onChange={handleChange}
-            className="outline-none bg-[var(--color4)] text-[var(--color2)] rounded-3xl px-2 py-1 shadow-lg shadow-red-800"
-          >
-            <option value="">Choose the searching type</option>
-            <option value="city">By city name</option>
-            <option value="lat">By latitude & longitude</option>
-          </select>
-          {queryType === "city" ? (
-            <input
-              required
-              onChange={(e) => setCity(e.target.value)}
-              value={city}
-              type="text"
-              placeholder="City name"
-              className=" rounded-3xl bg-[var(--color4)] text-[var(--color2)] px-3 py-1 outline-none shadow-lg shadow-red-800"
-            ></input>
-          ) : queryType === "lat" ? (
-            <div>
-              <input
-                required
-                onChange={(e) => setLat(e.target.value)}
-                value={lat}
-                type="text"
-                placeholder="Latitude"
-                className=" rounded-3xl bg-[var(--color4)] text-[var(--color2)] px-3 py-1 outline-none shadow-lg shadow-red-800 mb-3"
-              ></input>
-              <input
-                required
-                onChange={(e) => setLon(e.target.value)}
-                value={lon}
-                type="text"
-                placeholder="Longitude"
-                className=" rounded-3xl bg-[var(--color4)] text-[var(--color2)] px-3 py-1 outline-none shadow-lg shadow-red-800"
-              ></input>
-            </div>
-          ) : (
-            <div></div>
-          )}
-
-          <button
-            className={
-              queryType === ""
-                ? "hidden"
-                : "font-bold rounded-3xl bg-[var(--color4)] text-[var(--color2)] px-3 py-1 hover:bg-red-600 duration-300 shadow-lg shadow-red-800"
-            }
-          >
-            <div className="justify-between items-center flex flex-row gap-3">
-              Search <BsSearch size={15} />
-            </div>
-          </button>
-        </form> */
-}
-
-// const [zip, setZip] = useState("");
-// const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${process.env.PUBLIC_WEATHER_KEY}`;
-
-//   [
-//     queryType === "zip" ? (
-//       <input
-//         required
-//         onChange={(e) => setZip(e.target.value)}
-//         value={zip}
-//         type="number"
-//         placeholder="Zip Code"
-//         className=" rounded-3xl bg-[var(--color4)] text-[var(--color2)] px-3 py-1 outline-none shadow-lg shadow-red-800"
-//       ></input>

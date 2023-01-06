@@ -5,7 +5,7 @@ import { WeatherContext } from "../../context/WeatherContext";
 
 const Forecast = () => {
   const { weather, unit } = useContext(WeatherContext);
-  console.log(weather);
+  // console.log(weather);
 
   return (
     <div className="flex flex-col h-screen w-full justify-between items-center">
