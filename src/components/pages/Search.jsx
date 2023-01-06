@@ -143,21 +143,21 @@ const Search = () => {
         <Header text={"Search zone!"} />
 
         {/*//! BODY  */}
-        <div className="flex-col flex gap-4 justify-center items-center">
+        <div className="flex-col flex gap-4 justify-center items-center h-full">
           <h1
             data-aos="fade"
             data-aos-duration="1000"
             data-aos-delay="200"
-            className="font-bold text-2xl"
+            className="font-bold text-2xl text-center"
           >
-            Make your query here:
+            Choose smartly the kind of query...
           </h1>
           {/*//! OPTIONS */}
-          <div className="flex flex-row gap-6">
+          <div className="flex sm:flex-row flex-col gap-6">
             <div
               className={
                 queryType === ""
-                  ? "flex flex-row justify-center items-center text-center gap-4 p-2 font-bold text-xl"
+                  ? "flex sm:flex-row flex-col justify-center items-center text-center gap-4 p-2 font-bold text-xl"
                   : "hidden"
               }
             >

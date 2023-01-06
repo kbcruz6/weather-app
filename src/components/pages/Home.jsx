@@ -8,12 +8,12 @@ import weatherPic from "../../assets/weather.png";
 
 const Home = () => {
   return (
-    <div className="flex flex-col h-screen w-full justify-between">
+    <div className="h-screen ">
       {/*//! HEADER  */}
       <Header text={"Welcome to the ultimate Weather Forecast App!"} />
 
       {/*//! BODY  */}
-      <div className="justify-center items-center flex flex-col w-full gap-10">
+      <div className="flex flex-col w-full h-full gap-2 justify-center items-center ">
         <div className="flex sm:flex-row flex-col sm:justify-evenly justify-center items-center sm:p-4 mt-2">
           <img
             data-aos="fade-right"

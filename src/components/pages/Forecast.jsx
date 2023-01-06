@@ -11,7 +11,7 @@ const Forecast = () => {
     <div className="flex flex-col h-screen w-full justify-between items-center">
       <Header text={`${weather.name.toUpperCase()}, ${weather.sys.country}`} />
       {/*//! CURRENT WEATHER  */}
-      <div className="items-center justify-center flex flex-col">
+      <div className="items-center justify-center flex flex-col h-full">
         {/*//! TEMPERATURE & ICON */}
         <div className=" font-bold text-7xl text-center flex flex-col justify-center items-center">
           <img
