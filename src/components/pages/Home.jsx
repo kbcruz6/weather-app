@@ -32,14 +32,15 @@ const Home = () => {
             We provide the BEST Real-Time weather forecast for you!
           </div>
         </div>
-        <button
+        <div
           data-aos="fade-right"
           data-aos-duration="1000"
           data-aos-delay="1000"
-          className="font-bold rounded-3xl px-3 py-2 mb-4 text-2xl bg-[var(--color2)] text-[var(--color4)] hover:bg-[var(--color4)] hover:text-[var(--color2)] duration-300 shadow-lg shadow-red-800"
         >
-          <Link to="/search">Click here to make your query</Link>
-        </button>
+          <button className="font-bold rounded-3xl px-3 py-2 mb-4 text-2xl bg-[var(--color2)] text-[var(--color4)] hover:bg-[var(--color4)] hover:text-[var(--color2)] duration-300 shadow-lg shadow-red-800">
+            <Link to="/search">Click here to make your query</Link>
+          </button>
+        </div>
       </div>
 
       {/*//! FOOTER  */}
