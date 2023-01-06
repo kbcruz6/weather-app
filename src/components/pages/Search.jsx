@@ -17,15 +17,17 @@ const Search = () => {
   const [lat, setLat] = useState("");
   const [lon, setLon] = useState("");
   const [loading, setLoading] = useState(false);
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState({ city1: "", city2: "" });
   const PUBLIC_WEATHER_KEY = "708abcef5861171a96f64c0a61fd7cc2";
 
   const navigate = useNavigate();
+  const [mode, setMode] = useState(false);
+  const [modeDos, setModeDos] = useState(false);
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.city1}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`;
 
   const [urlCity, setUrlCity] = useState(
-    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`
+    `https://api.openweathermap.org/data/2.5/weather?q=${city.city2}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`
   );
   const urlLat = `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${PUBLIC_WEATHER_KEY}`;
 
@@ -53,25 +55,30 @@ const Search = () => {
     try {
       e.preventDefault();
       const response = await axios.get(urlLat);
-      setCity(response.data[0].name);
+      setCity({ city2: response.data[0].name });
+      setMode(!mode);
       console.log("RESPONSE: ", response);
       console.log("NAME: ", response.data[0].name);
-      navigate("/forecast");
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
+    const changeUrl = () => {
+      setUrlCity(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city.city2}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`
+      );
+      setModeDos(!modeDos);
+    };
+    changeUrl();
+    console.log("URLCITY", urlCity);
+  }, [mode]);
+
+  useEffect(() => {
     const fetchWeatherLat = async (e) => {
       try {
-        e.preventDefault();
-        setUrlCity(
-          `https://api.openweathermap.org/data/2.5/weather?q=${response.data[0].name
-            .split(" ")
-            .join("")}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`
-        );
-        console.log("URLCITY", urlCity);
+        // e.preventDefault();
         const response = await axios.get(urlCity);
         setWeather(response.data);
         navigate("/forecast");
@@ -79,10 +86,28 @@ const Search = () => {
         console.log(error.response);
       }
     };
-    return () => {
-      fetchWeatherLat();
-    };
-  }, [getCity]);
+    fetchWeatherLat();
+  }, [modeDos]);
+
+  // useEffect(() => {
+  //   const fetchWeatherLat = async (e) => {
+  //     try {
+  //       e.preventDefault();
+  //       setUrlCity(
+  //         `https://api.openweathermap.org/data/2.5/weather?q=${response.data[0].name
+  //           .split(" ")
+  //           .join("")}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`
+  //       );
+  //       console.log("URLCITY", urlCity);
+  //       const response = await axios.get(urlCity);
+  //       setWeather(response.data);
+  //       navigate("/forecast");
+  //     } catch (error) {
+  //       console.log(error.response);
+  //     }
+  //   };
+  //   fetchWeatherLat();
+  // }, [city]);
 
   // return Swal.fire({
   //   title: "Error! City not found",
@@ -155,8 +180,8 @@ const Search = () => {
                 >
                   <input
                     required
-                    onChange={(e) => setCity(e.target.value)}
-                    value={city}
+                    onChange={(e) => setCity({ city1: e.target.value })}
+                    value={city.city1}
                     type="text"
                     placeholder="City name"
                     className=" rounded-3xl bg-[var(--color4)] text-[var(--color2)] px-3 py-1 outline-none shadow-lg shadow-red-800"
