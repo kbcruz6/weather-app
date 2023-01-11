@@ -57,16 +57,16 @@ const Header = ({ text }) => {
             <label
               className={
                 checked
-                  ? "switch-label flex items-center bg-slate-500 w-[45px] h-[25px] rounded-full relative cursor-pointer"
-                  : "switch-label flex items-center bg-[var(--color4)] w-[45px] h-[25px] rounded-full relative cursor-pointer"
+                  ? "switch-label flex items-center bg-[var(--color4)] w-[45px] h-[25px] rounded-full relative cursor-pointer"
+                  : "switch-label flex items-center bg-slate-500 w-[45px] h-[25px] rounded-full relative cursor-pointer"
               }
               htmlFor="switch"
             >
               <span
                 className={
                   checked
-                    ? "switch-button w-[20px] relative h-[20px] rounded-full duration-200 left-[3px] moon "
-                    : "switch-button w-[20px] relative h-[20px] rounded-full duration-200 left-[3px] light "
+                    ? "switch-button w-[20px] relative h-[20px] rounded-full duration-200 left-[3px] light "
+                    : "switch-button w-[20px] relative h-[20px] rounded-full duration-200 left-[3px] moon "
                 }
               />
             </label>

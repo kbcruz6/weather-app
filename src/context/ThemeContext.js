@@ -4,7 +4,7 @@ export const ThemeContext = createContext();
 
 const ThemeContextProvider = ({ children }) => {
   const [checked, setChecked] = useState(false);
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
   const isDarkTheme = theme === "dark";
 
   const toggleTheme = () => {
