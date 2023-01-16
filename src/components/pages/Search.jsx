@@ -18,18 +18,18 @@ const Search = () => {
   const [lon, setLon] = useState("");
   const [loading, setLoading] = useState(false);
   const [city, setCity] = useState("");
-  const PUBLIC_WEATHER_KEY = "708abcef5861171a96f64c0a61fd7cc2";
+  const { REACT_APP_WEATHER_KEY } = process.env;
 
   const navigate = useNavigate();
   const [aux, setAux] = useState(false);
   const [auxTwo, setAuxTwo] = useState(false);
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${REACT_APP_WEATHER_KEY}&units=${unit}`;
 
   const [urlCity, setUrlCity] = useState(
-    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`
+    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${REACT_APP_WEATHER_KEY}&units=${unit}`
   );
-  const urlLat = `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${PUBLIC_WEATHER_KEY}`;
+  const urlLat = `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${REACT_APP_WEATHER_KEY}`;
 
   //! FUNCTIONS
   const fetchWeatherCity = async (e) => {
@@ -74,7 +74,7 @@ const Search = () => {
       return;
     } else {
       setUrlCity(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${PUBLIC_WEATHER_KEY}&units=${unit}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${REACT_APP_WEATHER_KEY}&units=${unit}`
       );
       setAuxTwo(!auxTwo);
     }
