@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
-import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import Footer from "../common/Footer";
 import Header from "../common/Header";
