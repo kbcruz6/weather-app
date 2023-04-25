@@ -7,13 +7,13 @@ const ThemeContextProvider = ({ children }) => {
   const [theme, setTheme] = useState("dark");
   const isDarkTheme = theme === "dark";
 
-  const toggleTheme = () => {
-    setTheme(isDarkTheme ? "light" : "dark");
-  };
-
   const onToggle = () => {
     toggleTheme();
     setChecked(!checked);
+  };
+
+  const toggleTheme = () => {
+    setTheme(isDarkTheme ? "light" : "dark");
   };
 
   const data = {
@@ -24,6 +24,7 @@ const ThemeContextProvider = ({ children }) => {
     onToggle,
     checked,
   };
+
   return <ThemeContext.Provider value={data}>{children}</ThemeContext.Provider>;
 };
 

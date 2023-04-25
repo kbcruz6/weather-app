@@ -40,7 +40,7 @@ const Forecast = () => {
             <h3 className="font-bold">Humidity</h3>
             <div>{weather.main.humidity} %</div>
           </div>
-          {/*//! DESCRIPTION  */}
+          {/*//! SKY CONDITIONS */}
           <div className="  text-center">
             <h3 className="font-bold">Sky conditions</h3>
             <div>

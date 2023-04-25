@@ -1,13 +1,13 @@
-import React, { useState, useContext } from "react";
-import { FaHome } from "react-icons/fa";
-import { Link, useLocation } from "react-router-dom";
-import { BsSearch } from "react-icons/bs";
+import React, { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
+import { Link, useLocation } from "react-router-dom";
+import { FaHome } from "react-icons/fa";
+import { BsSearch } from "react-icons/bs";
 
 const Header = ({ text }) => {
   const { checked, onToggle } = useContext(ThemeContext);
-
   const location = useLocation();
+
   return (
     <div className="w-full z-10 fixed top-0 bg-[var(--color2)] flex justify-between items-center shadow-md shadow-red-800 dark:shadow-gray-700 text-[var(--color4)] px-4 dark:bg-gray-800 dark:text-slate-300 duration-300">
       {/*//! TITLE  */}

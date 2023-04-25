@@ -1,8 +1,6 @@
 import React from "react";
-import { FaBars, FaTimes, FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
-import { FiPaperclip } from "react-icons/fi";
-import { Link } from "react-scroll";
 
 const Footer = () => {
   return (
@@ -11,7 +9,7 @@ const Footer = () => {
         {/*//! CONTACT  */}
         <div className="flex gap-2 ">
           <a
-            href="https://www.linkedin.com/in/agustin-frontend-react/"
+            href="https://www.linkedin.com/in/agustin-cruz-fullstack-developer/"
             target="_blank"
             className="hover:text-red-600 duration-300"
           >

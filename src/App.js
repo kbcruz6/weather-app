@@ -1,19 +1,24 @@
 import "./App.css";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ThemeContext } from "./context/ThemeContext";
+import WeatherContextProvider from "./context/WeatherContext";
+
+//! Pages
 import Home from "./components/pages/Home";
 import Search from "./components/pages/Search";
 import Forecast from "./components/pages/Forecast";
+
+//! AOS
 import AOS from "aos";
 import "aos/dist/aos.css";
-import WeatherContextProvider from "./context/WeatherContext";
-import { ThemeContext } from "./context/ThemeContext";
 AOS.init();
 
 function App() {
   setTimeout(() => {
     AOS.refresh();
   }, 500);
+
   const { isDarkTheme } = useContext(ThemeContext);
 
   return (

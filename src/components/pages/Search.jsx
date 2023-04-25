@@ -1,16 +1,18 @@
 import React, { useState, useContext, useEffect } from "react";
+import { WeatherContext } from "../../context/WeatherContext";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useNavigate, useLocation } from "react-router-dom";
-import { BsSearch } from "react-icons/bs";
-import Swal from "sweetalert2";
+
 import Footer from "../common/Footer";
 import Header from "../common/Header";
-import { WeatherContext } from "../../context/WeatherContext";
+
 import Spinner from "../common/Spinner";
+import { BsSearch } from "react-icons/bs";
+import Swal from "sweetalert2";
 
 const Search = () => {
   //! VARIABLES
-  const { weather, setWeather, unit } = useContext(WeatherContext);
+  const { setWeather, unit } = useContext(WeatherContext);
 
   const [queryType, setQueryType] = useState("");
   const [lat, setLat] = useState("");
@@ -28,9 +30,11 @@ const Search = () => {
   const [urlCity, setUrlCity] = useState(
     `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${REACT_APP_WEATHER_KEY}&units=${unit}`
   );
+
   const urlLat = `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${REACT_APP_WEATHER_KEY}`;
 
   //! FUNCTIONS
+  //! Fetch with city name
   const fetchWeatherCity = async (e) => {
     try {
       e.preventDefault();
@@ -50,6 +54,7 @@ const Search = () => {
     }
   };
 
+  //! Getting City name with coordinates
   const getCity = async (e) => {
     try {
       e.preventDefault();
@@ -91,7 +96,6 @@ const Search = () => {
           setLoading(false);
           navigate("/forecast");
         } catch (error) {
-          console.log("ERROR EN EL ULTIMO FETCH", error.response);
           return Swal.fire({
             title: "Error! City not found",
             text: "Please enter a valid city",
@@ -104,8 +108,8 @@ const Search = () => {
     }
   }, [auxTwo]);
 
-  // 51.5098
-  // -0.1180
+  //? 51.5098
+  //? -0.1180
 
   if (loading) {
     return <Spinner />;
